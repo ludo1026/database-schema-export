@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://generator/gen/schemas" xmlns:schemas="http://generator/gen/schemas">
+  <xs:element name="gen">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="templates"/>
+        <xs:element ref="templateGroupes"/>
+        <xs:element ref="stereotypes"/>
+        <xs:element ref="classes"/>
+        <xs:element ref="genererGroupe"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="templates">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="template"/>
+      </xs:sequence>
+
+      <xs:attribute name="inDir" use="required" type="xs:NCName"/>
+      <xs:attribute name="outDir" use="required"/>
+      <xs:attribute name="packageJavaBase" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="template">
+    <xs:complexType>
+      <xs:attribute name="file" use="required" type="xs:NCName"/>
+      <xs:attribute name="nom" use="required" type="xs:NCName"/>
+      <xs:attribute name="nomElementGenere" use="required" type="xs:NCName"/>
+      <xs:attribute name="outDir" use="required"/>
+      <xs:attribute name="outFile" use="required" type="xs:NCName"/>
+      <xs:attribute name="packageJava" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="templateGroupes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="templateGroupe"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="templateGroupe">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="templateRef"/>
+      </xs:sequence>
+      <xs:attribute name="nom" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="templateRef">
+    <xs:complexType>
+      <xs:attribute name="nom" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="stereotypes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="stereotype"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="stereotype">
+    <xs:complexType>
+      <xs:attribute name="nom" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="classes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="classe"/>
+      </xs:sequence>
+
+      <xs:attribute name="packageBase" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="classe">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="proprietesClasse"/>
+        <xs:element ref="attributs"/>
+        <xs:element ref="methodes"/>
+        <xs:element ref="stereotypesClasseRef"/>
+        <xs:element ref="associations"/>
+        <xs:element ref="classeParents"/>
+      </xs:sequence>
+      <xs:attribute name="description" use="required" type="xs:NCName"/>
+      <xs:attribute name="genId" use="required" type="xs:NCName"/>
+      <xs:attribute name="nomJava" use="required" type="xs:NCName"/>
+      <xs:attribute name="nomTable" use="required" type="xs:NCName"/>
+      <xs:attribute name="nomVue" use="required" type="xs:NCName"/>
+      <xs:attribute name="packageJava" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="proprietesClasse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="proprieteClasse"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="proprieteClasse">
+    <xs:complexType>
+      <xs:attribute name="nom" use="required" type="xs:NCName"/>
+      <xs:attribute name="valeur" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="attributs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="attribut"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="attribut">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="proprietesAttribut"/>
+        <xs:element ref="stereotypesAttributRef"/>
+      </xs:sequence>
+      <xs:attribute name="description" use="required" type="xs:NCName"/>
+      <xs:attribute name="estCleIncrementee" use="required" type="xs:boolean"/>
+      <xs:attribute name="estClePrimaire" use="required" type="xs:boolean"/>
+      <xs:attribute name="estDansTable" use="required" type="xs:boolean"/>
+      <xs:attribute name="genId" use="required" type="xs:NCName"/>
+      <xs:attribute name="nbMax" use="required" type="xs:integer"/>
+      <xs:attribute name="nbMin" use="required" type="xs:integer"/>
+      <xs:attribute name="nomJava" use="required" type="xs:NCName"/>
+      <xs:attribute name="nomSQL" use="required" type="xs:NCName"/>
+      <xs:attribute name="size" use="required" type="xs:integer"/>
+      <xs:attribute name="type" use="required" type="xs:NCName"/>
+      <xs:attribute name="typeSQL" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="proprietesAttribut">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="proprieteAttribut"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="proprieteAttribut">
+    <xs:complexType>
+      <xs:attribute name="nom" use="required" type="xs:NCName"/>
+      <xs:attribute name="valeur" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="stereotypesAttributRef">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="stereotypeAttributRef"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="stereotypeAttributRef">
+    <xs:complexType>
+      <xs:attribute name="stereotypeAttributNom" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="methodes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="methode"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="methode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="proprietesMethode"/>
+        <xs:element ref="parametres"/>
+        <xs:element ref="stereotypesMethodeRef"/>
+      </xs:sequence>
+      <xs:attribute name="description" use="required" type="xs:NCName"/>
+      <xs:attribute name="genId" use="required" type="xs:NCName"/>
+      <xs:attribute name="nomJava" use="required" type="xs:NCName"/>
+      <xs:attribute name="retourType" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="proprietesMethode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="proprieteMethode"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="proprieteMethode">
+    <xs:complexType>
+      <xs:attribute name="nom" use="required" type="xs:NCName"/>
+      <xs:attribute name="valeur" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="parametres">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="parametre"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="parametre">
+    <xs:complexType>
+      <xs:attribute name="description" use="required" type="xs:NCName"/>
+      <xs:attribute name="genId" use="required" type="xs:NCName"/>
+      <xs:attribute name="nomJava" use="required" type="xs:NCName"/>
+      <xs:attribute name="type" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="stereotypesMethodeRef">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="stereotypeMethodeRef"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="stereotypeMethodeRef">
+    <xs:complexType>
+      <xs:attribute name="stereotypeMethodeNom" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="stereotypesClasseRef">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="stereotypeClasseRef"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="stereotypeClasseRef">
+    <xs:complexType>
+      <xs:attribute name="stereotypeClasseNom" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="associations">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="association"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="association">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="classeDeAssociation"/>
+      </xs:sequence>
+      <xs:attribute name="classeGenId" use="required" type="xs:NCName"/>
+      <xs:attribute name="description" use="required" type="xs:NCName"/>
+      <xs:attribute name="genId" use="required" type="xs:NCName"/>
+      <xs:attribute name="nbMax" use="required" type="xs:integer"/>
+      <xs:attribute name="nbMin" use="required" type="xs:integer"/>
+      <xs:attribute name="nomJava" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="classeDeAssociation">
+    <xs:complexType>
+
+      <xs:attribute name="_type" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="classeParents">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="classeParent"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="classeParent">
+    <xs:complexType>
+      <xs:attribute name="classeGenId" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="genererGroupe">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="genererParClasses"/>
+        <xs:element ref="genererParTemplates"/>
+        <xs:element ref="genererParStereotypes"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="genererParClasses">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="genererParClasse"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="genererParClasse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="classesRefPourGenererParClasse"/>
+        <xs:element ref="templateGroupesRefPourGenererParClasse"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="classesRefPourGenererParClasse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="classeRefPourGenererParClasse"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="classeRefPourGenererParClasse">
+    <xs:complexType>
+      <xs:attribute name="classeGenId" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="templateGroupesRefPourGenererParClasse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="templateGroupeRefPourGenererParClasse"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="templateGroupeRefPourGenererParClasse">
+    <xs:complexType>
+      <xs:attribute name="templateGroupeNom" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="genererParTemplates">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="genererParTemplate"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="genererParTemplate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="templateGroupesRefPourGenererParTemplate"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="templateGroupesRefPourGenererParTemplate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="templateGroupeRefPourGenererParTemplate"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="templateGroupeRefPourGenererParTemplate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="stereotypesRefPourGenererParTemplate"/>
+      </xs:sequence>
+      <xs:attribute name="templateGroupeNom" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="stereotypesRefPourGenererParTemplate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="stereotypeRefPourGenererParTemplate"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="stereotypeRefPourGenererParTemplate">
+    <xs:complexType>
+      <xs:attribute name="stereotypeNom" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="genererParStereotypes">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="genererParStereotype"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="genererParStereotype">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="stereotypesRefPourGenererParStereotype"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="stereotypesRefPourGenererParStereotype">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="stereotypeRefPourGenererParStereotype"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="stereotypeRefPourGenererParStereotype">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="templateGroupesRefPourGenererParStereotype"/>
+      </xs:sequence>
+      <xs:attribute name="stereotypeNom" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="templateGroupesRefPourGenererParStereotype">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="templateGroupeRefPourGenererParStereotype"/>
+      </xs:sequence>
+
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="templateGroupeRefPourGenererParStereotype">
+    <xs:complexType>
+      <xs:attribute name="templateGroupeNom" use="required" type="xs:NCName"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     ${date} ${time}                                                        
+
+     ${project}    
+     ${description}
+                   
+     ${user}                                                                
+     ====================================================================== -->
+<project name="database-schema-export" basedir="." default="generate">
+    <description>
+            Génération de code
+    </description>
+	
+    <property name="src.dir" value="src"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="build.dir" value="build"/>
+    <property name="resources.dir" value="src/main/resources"/>
+
+    <path id="src.path">
+      <fileset dir="${src.dir}"/>
+    </path>
+    
+    <path id="master-classpath">
+      <fileset dir="${lib.dir}">
+        <include name="*.jar"/>
+      </fileset>
+      <pathelement path="${build.dir}"/>
+    </path>
+  
+    <!-- ================================= 
+          Génération des beans de parsing du fichier config.xml
+          dans le package de codegenerator              
+         ================================= -->
+	<property name="generated.dir" value="generated"/>
+	<property name="generator.main-class" value="org.ludo1026.database.Main"/>
+	
+	<!-- Nettoyer -->
+	<target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${generated.dir}"/>
+    </target>
+
+    <!-- Compiler -->
+    <target name="compile-all">
+		<mkdir dir="${build.dir}"/>
+        <mkdir dir="${generated.dir}"/>
+        <copy todir="${build.dir}">
+            <fileset dir="${resources.dir}" />
+        </copy>
+		<javac srcdir="${src.dir}" destdir="${build.dir}" debug="true" failonerror="true" optimize="on">
+			<classpath refid="master-classpath"/>
+		</javac>
+    </target>
+	
+    <!-- Générer les fichiers -->
+    <target name="generate" depends="clean, compile-all">
+		<java dir="${build.dir}" classname="${generator.main-class}" fork="false">
+			<classpath refid="master-classpath"/>
+		</java>
+    </target>
+	
+</project>

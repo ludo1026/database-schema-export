@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gen xmlns="http://generator/gen/schemas">
+  <classes packageBase="org.ludo.codegenerator">
+    <classe xmlns="" genId="entrepot" nomJava="entrepot" nomTable="entrepot">
+      <attribut genId="id" nomJava="id" type="Integer" nomSQL="id" typeSQL="int8" size="19" estClePrimaire="true" nbMin="1" nbMax="1" />
+      <attribut genId="nom" nomJava="nom" type="String" nomSQL="nom" typeSQL="varchar" size="255" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="version" nomJava="version" type="Integer" nomSQL="version" typeSQL="int4" size="10" estClePrimaire="false" nbMin="1" nbMax="1" />
+    </classe>
+    <classe xmlns="" genId="produit" nomJava="produit" nomTable="produit">
+      <attribut genId="id" nomJava="id" type="Integer" nomSQL="id" typeSQL="int8" size="19" estClePrimaire="true" nbMin="1" nbMax="1" />
+      <attribut genId="description" nomJava="description" type="String" nomSQL="description" typeSQL="varchar" size="255" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="nom" nomJava="nom" type="String" nomSQL="nom" typeSQL="varchar" size="255" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="version" nomJava="version" type="Integer" nomSQL="version" typeSQL="int4" size="10" estClePrimaire="false" nbMin="1" nbMax="1" />
+    </classe>
+    <classe xmlns="" genId="person" nomJava="person" nomTable="person">
+      <attribut genId="id" nomJava="id" type="Integer" nomSQL="id" typeSQL="int8" size="19" estClePrimaire="true" nbMin="1" nbMax="1" />
+      <attribut genId="name" nomJava="name" type="String" nomSQL="name" typeSQL="varchar" size="9" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="datebirth" nomJava="datebirth" type="String" nomSQL="datebirth" typeSQL="varchar" size="255" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="version" nomJava="version" type="Integer" nomSQL="version" typeSQL="int4" size="10" estClePrimaire="false" nbMin="1" nbMax="1" />
+    </classe>
+    <classe xmlns="" genId="client" nomJava="client" nomTable="client">
+      <attribut genId="prenom" nomJava="prenom" type="String" nomSQL="prenom" typeSQL="varchar" size="255" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="id" nomJava="id" type="Integer" nomSQL="id" typeSQL="int8" size="19" estClePrimaire="true" nbMin="1" nbMax="1" />
+      <attribut genId="codepostal" nomJava="codepostal" type="String" nomSQL="codepostal" typeSQL="varchar" size="255" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="voie" nomJava="voie" type="String" nomSQL="voie" typeSQL="varchar" size="255" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="ville" nomJava="ville" type="String" nomSQL="ville" typeSQL="varchar" size="255" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="nom" nomJava="nom" type="String" nomSQL="nom" typeSQL="varchar" size="255" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="numero" nomJava="numero" type="String" nomSQL="numero" typeSQL="varchar" size="255" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="version" nomJava="version" type="Integer" nomSQL="version" typeSQL="int4" size="10" estClePrimaire="false" nbMin="1" nbMax="1" />
+    </classe>
+    <classe xmlns="" genId="lignepanier" nomJava="lignepanier" nomTable="lignepanier">
+      <attribut genId="id" nomJava="id" type="Integer" nomSQL="id" typeSQL="int8" size="19" estClePrimaire="true" nbMin="1" nbMax="1" />
+      <attribut genId="articleId" nomJava="articleId" type="Integer" nomSQL="article_id" typeSQL="int8" size="19" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="montant" nomJava="montant" type="BigDecimal" nomSQL="montant" typeSQL="float8" size="17" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="quantite" nomJava="quantite" type="Integer" nomSQL="quantite" typeSQL="int4" size="10" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="version" nomJava="version" type="Integer" nomSQL="version" typeSQL="int4" size="10" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <association genId="article" nomJava="article" classeGenId="article" nbMin="1" nbMax="1">
+        <associationAttributs>
+          <associationAttribut genId="articleId" />
+        </associationAttributs>
+      </association>
+    </classe>
+    <classe xmlns="" genId="utilisateurProfil" nomJava="utilisateurProfil" nomTable="utilisateur_profil">
+      <attribut genId="profilsId" nomJava="profilsId" type="Integer" nomSQL="profils_id" typeSQL="int8" size="19" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="utilisateurId" nomJava="utilisateurId" type="Integer" nomSQL="utilisateur_id" typeSQL="int8" size="19" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <association genId="utilisateur" nomJava="utilisateur" classeGenId="utilisateur" nbMin="1" nbMax="1">
+        <associationAttributs>
+          <associationAttribut genId="utilisateurId" />
+        </associationAttributs>
+      </association>
+      <association genId="profil" nomJava="profil" classeGenId="profil" nbMin="1" nbMax="1">
+        <associationAttributs>
+          <associationAttribut genId="profilsId" />
+        </associationAttributs>
+      </association>
+    </classe>
+    <classe xmlns="" genId="panierLignepanier" nomJava="panierLignepanier" nomTable="panier_lignepanier">
+      <attribut genId="lignepaniersId" nomJava="lignepaniersId" type="Integer" nomSQL="lignepaniers_id" typeSQL="int8" size="19" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="panierId" nomJava="panierId" type="Integer" nomSQL="panier_id" typeSQL="int8" size="19" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <association genId="lignepanier" nomJava="lignepanier" classeGenId="lignepanier" nbMin="1" nbMax="1">
+        <associationAttributs>
+          <associationAttribut genId="lignepaniersId" />
+        </associationAttributs>
+      </association>
+      <association genId="panier" nomJava="panier" classeGenId="panier" nbMin="1" nbMax="1">
+        <associationAttributs>
+          <associationAttribut genId="panierId" />
+        </associationAttributs>
+      </association>
+    </classe>
+    <classe xmlns="" genId="article" nomJava="article" nomTable="article">
+      <attribut genId="id" nomJava="id" type="Integer" nomSQL="id" typeSQL="int8" size="19" estClePrimaire="true" nbMin="1" nbMax="1" />
+      <attribut genId="produitId" nomJava="produitId" type="Integer" nomSQL="produit_id" typeSQL="int8" size="19" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="version" nomJava="version" type="Integer" nomSQL="version" typeSQL="int4" size="10" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <association genId="produit" nomJava="produit" classeGenId="produit" nbMin="1" nbMax="1">
+        <associationAttributs>
+          <associationAttribut genId="produitId" />
+        </associationAttributs>
+      </association>
+    </classe>
+    <classe xmlns="" genId="compte" nomJava="compte" nomTable="compte">
+      <attribut genId="id" nomJava="id" type="Integer" nomSQL="id" typeSQL="int8" size="19" estClePrimaire="true" nbMin="1" nbMax="1" />
+      <attribut genId="clientId" nomJava="clientId" type="Integer" nomSQL="client_id" typeSQL="int8" size="19" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="version" nomJava="version" type="Integer" nomSQL="version" typeSQL="int4" size="10" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <association genId="client" nomJava="client" classeGenId="client" nbMin="1" nbMax="1">
+        <associationAttributs>
+          <associationAttribut genId="clientId" />
+        </associationAttributs>
+      </association>
+    </classe>
+    <classe xmlns="" genId="article3" nomJava="article3" nomTable="article3">
+      <attribut genId="idUtilisateur" nomJava="idUtilisateur" type="Integer" nomSQL="id_utilisateur" typeSQL="int8" size="19" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="idArticle" nomJava="idArticle" type="Integer" nomSQL="id_article" typeSQL="int8" size="19" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="idProduit" nomJava="idProduit" type="Integer" nomSQL="id_produit" typeSQL="int8" size="19" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <association genId="article2" nomJava="article2" classeGenId="article2" nbMin="1" nbMax="1">
+        <associationAttributs>
+          <associationAttribut genId="idArticle" />
+          <associationAttribut genId="idProduit" />
+          <associationAttribut genId="idUtilisateur" />
+        </associationAttributs>
+      </association>
+    </classe>
+    <classe xmlns="" genId="article2" nomJava="article2" nomTable="article2">
+      <attribut genId="idUtilisateur" nomJava="idUtilisateur" type="Integer" nomSQL="id_utilisateur" typeSQL="int8" size="19" estClePrimaire="true" nbMin="1" nbMax="1" />
+      <attribut genId="idArticle" nomJava="idArticle" type="Integer" nomSQL="id_article" typeSQL="int8" size="19" estClePrimaire="true" nbMin="1" nbMax="1" />
+      <attribut genId="idProduit" nomJava="idProduit" type="Integer" nomSQL="id_produit" typeSQL="int8" size="19" estClePrimaire="true" nbMin="1" nbMax="1" />
+    </classe>
+    <classe xmlns="" genId="utilisateur" nomJava="utilisateur" nomTable="utilisateur">
+      <attribut genId="prenom" nomJava="prenom" type="String" nomSQL="prenom" typeSQL="varchar" size="255" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="id" nomJava="id" type="Integer" nomSQL="id" typeSQL="int8" size="19" estClePrimaire="true" nbMin="1" nbMax="1" />
+      <attribut genId="email" nomJava="email" type="String" nomSQL="email" typeSQL="varchar" size="255" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="motdepasse" nomJava="motdepasse" type="String" nomSQL="motdepasse" typeSQL="varchar" size="255" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="civilite" nomJava="civilite" type="String" nomSQL="civilite" typeSQL="varchar" size="255" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="nom" nomJava="nom" type="String" nomSQL="nom" typeSQL="varchar" size="255" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="datederniereconnexion" nomJava="datederniereconnexion" type="Date" nomSQL="datederniereconnexion" typeSQL="timestamp" size="29" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="version" nomJava="version" type="Integer" nomSQL="version" typeSQL="int4" size="10" estClePrimaire="false" nbMin="1" nbMax="1" />
+    </classe>
+    <classe xmlns="" genId="panier" nomJava="panier" nomTable="panier">
+      <attribut genId="id" nomJava="id" type="Integer" nomSQL="id" typeSQL="int8" size="19" estClePrimaire="true" nbMin="1" nbMax="1" />
+      <attribut genId="clientId" nomJava="clientId" type="Integer" nomSQL="client_id" typeSQL="int8" size="19" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="version" nomJava="version" type="Integer" nomSQL="version" typeSQL="int4" size="10" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <association genId="client" nomJava="client" classeGenId="client" nbMin="1" nbMax="1">
+        <associationAttributs>
+          <associationAttribut genId="clientId" />
+        </associationAttributs>
+      </association>
+    </classe>
+    <classe xmlns="" genId="profil" nomJava="profil" nomTable="profil">
+      <attribut genId="id" nomJava="id" type="Integer" nomSQL="id" typeSQL="int8" size="19" estClePrimaire="true" nbMin="1" nbMax="1" />
+      <attribut genId="client" nomJava="client" nomSQL="client" typeSQL="bytea" size="2147483647" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="role" nomJava="role" type="Integer" nomSQL="role" typeSQL="int4" size="10" estClePrimaire="false" nbMin="1" nbMax="1" />
+      <attribut genId="version" nomJava="version" type="Integer" nomSQL="version" typeSQL="int4" size="10" estClePrimaire="false" nbMin="1" nbMax="1" />
+    </classe>
+  </classes>
+  <templateGroupes>
+    <templateGroupe nom="beanGroupe">
+      <templateRef nom="bean_template" />
+    </templateGroupe>
+    <templateGroupe nom="daoGroupe">
+      <templateRef nom="dao_template" />
+    </templateGroupe>
+    <templateGroupe nom="serviceGroupe">
+      <templateRef nom="service_template" />
+      <templateRef nom="serviceImpl_template" />
+    </templateGroupe>
+  </templateGroupes>
+  <templates inDir="config/templates" outDir="" packageJavaBase="">
+    <template nom="bean_template" file="bean_template.vlt" packageJava="PPP.bean.impl" outDir="generated" outFile="XXX.java" nomElementGenere="XXX" />
+    <template nom="dao_template" file="dao_template.vlt" packageJava="PPP" outDir="generated" outFile="XXXDao.java" nomElementGenere="XXXDao" />
+    <template nom="service_template" file="service_template.vlt" packageJava="PPP" outDir="generated" outFile="XXX.java" nomElementGenere="XXX" />
+    <template nom="serviceImpl_template" file="serviceImpl_template.vlt" packageJava="PPP" outDir="generated" outFile="XXXImpl.java" nomElementGenere="XXXImpl" />
+  </templates>
+  <stereotypes />
+  <genererGroupe>
+    <!-- <genererParTemplates> -->
+    <!-- <genererParTemplate> -->
+    <!-- <templateGroupesRefPourGenererParTemplate> -->
+    <!-- <templateGroupeRefPourGenererParTemplate templateGroupeNom="serviceConfigGroupe"> -->
+    <!-- <stereotypesRefPourGenererParTemplate> -->
+    <!-- <stereotypeRefPourGenererParTemplate stereotypeNom="service" /> -->
+    <!-- </stereotypesRefPourGenererParTemplate> -->
+    <!-- </templateGroupeRefPourGenererParTemplate> -->
+    <!-- </templateGroupesRefPourGenererParTemplate> -->
+    <!-- </genererParTemplate> -->
+    <!-- </genererParTemplates> -->
+    <genererParStereotypes>
+      <genererParStereotype>
+        <stereotypesRefPourGenererParStereotype>
+          <stereotypeRefPourGenererParStereotype stereotypeNom="bean" />
+          <templateGroupesRefPourGenererParStereotype>
+            <templateGroupeRefPourGenererParStereotype templateGroupeNom="beanGroupe" />
+            <templateGroupeRefPourGenererParStereotype templateGroupeNom="daoGroupe" />
+          </templateGroupesRefPourGenererParStereotype>
+        </stereotypesRefPourGenererParStereotype>
+      </genererParStereotype>
+      <genererParStereotype>
+        <stereotypesRefPourGenererParStereotype>
+          <stereotypeRefPourGenererParStereotype stereotypeNom="service" />
+          <templateGroupesRefPourGenererParStereotype>
+            <templateGroupeRefPourGenererParStereotype templateGroupeNom="serviceGroupe" />
+          </templateGroupesRefPourGenererParStereotype>
+        </stereotypesRefPourGenererParStereotype>
+      </genererParStereotype>
+    </genererParStereotypes>
+  </genererGroupe>
+</gen>
+
