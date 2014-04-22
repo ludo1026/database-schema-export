@@ -7,6 +7,13 @@
 	<version>1.0</version>
 
 	<dependencies>
+	
+		<dependency>
+		    <groupId>org.apache.derby</groupId>
+		    <artifactId>derbyclient</artifactId>
+		    <version>10.10.1.1</version>
+		</dependency>
+	
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>

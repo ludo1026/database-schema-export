@@ -16,10 +16,10 @@ public class Table {
 
 	Map<String, Colonne> colonneByNames = new HashMap<String, Colonne>();
 	ClePrimaire clePrimaire = new ClePrimaire();
-	List<CleEtrangere> cleEtrangeres = new ArrayList<>();
-	List<CleEtrangere> cleEtrangereInverses = new ArrayList<>();
+	List<CleEtrangere> cleEtrangeres = new ArrayList<CleEtrangere>();
+	List<CleEtrangere> cleEtrangereInverses = new ArrayList<CleEtrangere>();
 
-	private Map<String, Object> infos = new HashMap<>();
+	private Map<String, Object> infos = new HashMap<String, Object>();
 
 	public void addToClePrimaire(final String nameColonne) {
 		final Colonne colonne = this.getColonneByNames().get(nameColonne);

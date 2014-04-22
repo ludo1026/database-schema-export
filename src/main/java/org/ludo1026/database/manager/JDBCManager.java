@@ -225,7 +225,7 @@ public class JDBCManager {
 	 * @throws SQLException
 	 */
 	private void defineColonnes(final Connection connection, final DatabaseMetaData meta, final Table table) throws SQLException {
-		final List<Colonne> colonnes = new ArrayList<>();
+		final List<Colonne> colonnes = new ArrayList<Colonne>();
 		final ResultSet resultat = meta.getColumns(connection.getCatalog(), null, table.getName(), "%");
 		final ResultSetMetaData rsmd = resultat.getMetaData();
 		while (resultat.next()) {

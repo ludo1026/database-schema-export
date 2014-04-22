@@ -15,7 +15,7 @@ public class Colonne {
 	private String name, type, size, description;
 	private boolean isNullable;
 	@JsonIgnore
-	private Map<String, Object> infos = new HashMap<>();
+	private Map<String, Object> infos = new HashMap<String, Object>();
 
 	@Override
 	public String toString() {

@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Schema {
 
-	private Map<String, Table> tableByNames = new HashMap<>();
+	private Map<String, Table> tableByNames = new HashMap<String, Table>();
 
 	public void addTable(final Table table) {
 		this.getTableByNames().put(table.getName(), table);

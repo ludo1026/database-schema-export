@@ -11,7 +11,7 @@ import org.ludo1026.database.manager.bean.Colonne;
 import org.ludo1026.database.manager.bean.Schema;
 import org.ludo1026.database.manager.bean.Table;
 
-public class JsonLinksWriter {
+public class JsonEntityLinksWriter {
 
 	/**
 	 * Write JSON.

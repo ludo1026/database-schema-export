@@ -1,7 +1,7 @@
 package org.ludo1026.database;
 
 import org.ludo1026.database.json.writer.JsonEntitiesWriter;
-import org.ludo1026.database.json.writer.JsonLinksWriter;
+import org.ludo1026.database.json.writer.JsonEntityLinksWriter;
 import org.ludo1026.database.manager.JDBCManager;
 import org.ludo1026.database.manager.bean.Schema;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -33,7 +33,7 @@ public class Main {
 		Schema schema = jdbcManager.main();
 		
 		JsonEntitiesWriter jsonEntitiesWriter = new JsonEntitiesWriter();
-		JsonLinksWriter jsonLinksWriter = new JsonLinksWriter();
+		JsonEntityLinksWriter jsonLinksWriter = new JsonEntityLinksWriter();
 		
 		jsonEntitiesWriter.write(schema, CONFIG_OUT_FILENAME_ENTITIES);
 		jsonLinksWriter.write(schema, CONFIG_OUT_FILENAME_LINKS);
