@@ -56,15 +56,15 @@ public class JsonEntitiesWriter {
 			}
 			bw.write("\n  \""+StringUtils.uncapitalize(formatId(table.getName()))+"\": {");
 			
-			bw.write("\n    ");
+			// bw.write("\n    ");
 			// bw.write("id:\""+StringUtils.uncapitalize(formatName(table.getName()))+"\", ");
 			//bw.write("name:\""+StringUtils.uncapitalize(formatName(table.getName()))+"\", ");
 			bw.write("sqlTable:\""+table.getName()+"\", ");
 			bw.write("description:\""+(table.getDescription()==null?"":table.getDescription())+"\", ");
 
-			bw.write("\n    stereotypes:[\"entity\"],");
+			// bw.write("\n    stereotypes:[\"entity\"],");
 
-			bw.write("\n    attributes:{");
+			bw.write("attributes: {");
 			boolean isFirstColonne = true;
 			for(Colonne colonne : table.getColonneByNames().values()) {
 				if(isFirstColonne) {
@@ -72,7 +72,7 @@ public class JsonEntitiesWriter {
 				} else {
 					bw.write(",");
 				}
-				bw.write("\n      \""+StringUtils.uncapitalize(formatId(colonne.getName()))+"\": {");
+				bw.write("\n    \""+StringUtils.uncapitalize(formatId(colonne.getName()))+"\": {");
 				//bw.write("id:\""+StringUtils.uncapitalize(formatName(colonne.getName()))+"\", ");
 				//bw.write("name:\""+StringUtils.uncapitalize(formatName(colonne.getName()))+"\", ");
 				bw.write("type:\""+getTypeForColonne(colonne)+"\", ");
@@ -92,7 +92,7 @@ public class JsonEntitiesWriter {
 				bw.write("description:\""+(colonne.getDescription()==null?"":colonne.getDescription())+"\"");
 				boolean showInfo = false;
 				if(showInfo) {
-					bw.write(", infos:{");
+					bw.write(", infos : { ");
 					boolean isFirstInfo = true;
 					for(String infoKey : colonne.getInfos().keySet()) {
 						if(isFirstInfo) {
@@ -106,7 +106,7 @@ public class JsonEntitiesWriter {
 				}
 				bw.write("}");
 			}
-			bw.write("\n    }");
+			bw.write("\n  }");
 
 			/*
 			bw.write("\n    links:[");
@@ -135,9 +135,12 @@ public class JsonEntitiesWriter {
 			}
 			bw.write("\n    ]");
 			*/
-			bw.write("\n  }");
+			bw.write("}");
 		}
 		bw.write("\n};\n\n");
+		bw.write("for(var entityId in entities) {\n");
+		bw.write("	entities[entityId].stereotypes=[\"entity\"];\n");
+		bw.write("}\n\n");
 		bw.write("module.exports=entities;");
 	}
 
