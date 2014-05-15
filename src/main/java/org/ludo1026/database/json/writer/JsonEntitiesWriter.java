@@ -58,7 +58,7 @@ public class JsonEntitiesWriter {
 			
 			bw.write("\n    ");
 			// bw.write("id:\""+StringUtils.uncapitalize(formatName(table.getName()))+"\", ");
-			bw.write("name:\""+StringUtils.uncapitalize(formatName(table.getName()))+"\", ");
+			//bw.write("name:\""+StringUtils.uncapitalize(formatName(table.getName()))+"\", ");
 			bw.write("sqlTable:\""+table.getName()+"\", ");
 			bw.write("description:\""+(table.getDescription()==null?"":table.getDescription())+"\", ");
 
@@ -74,7 +74,7 @@ public class JsonEntitiesWriter {
 				}
 				bw.write("\n      \""+StringUtils.uncapitalize(formatId(colonne.getName()))+"\": {");
 				//bw.write("id:\""+StringUtils.uncapitalize(formatName(colonne.getName()))+"\", ");
-				bw.write("name:\""+StringUtils.uncapitalize(formatName(colonne.getName()))+"\", ");
+				//bw.write("name:\""+StringUtils.uncapitalize(formatName(colonne.getName()))+"\", ");
 				bw.write("type:\""+getTypeForColonne(colonne)+"\", ");
 				bw.write("sqlName:\""+colonne.getName()+"\", ");
 				bw.write("sqlType:\""+colonne.getType()+"\", ");
