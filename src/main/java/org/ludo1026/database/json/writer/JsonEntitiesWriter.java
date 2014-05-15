@@ -45,7 +45,7 @@ public class JsonEntitiesWriter {
 	}
 
 	private void writeSchema(Schema schema, BufferedWriter bw) throws IOException {
-		bw.write("var entities = [");
+		bw.write("var entities = {");
 		boolean isFirst = true;
 		for(String tableName : schema.getTableByNames().keySet()) {
 			Table table = schema.getTableByNames().get(tableName);
@@ -54,17 +54,17 @@ public class JsonEntitiesWriter {
 			} else {
 				bw.write(",");
 			}
-			bw.write("\n  {");
+			bw.write("\n  \""+StringUtils.uncapitalize(formatId(table.getName()))+"\": {");
 			
 			bw.write("\n    ");
-			bw.write("id:\""+StringUtils.uncapitalize(formatName(table.getName()))+"\", ");
+			// bw.write("id:\""+StringUtils.uncapitalize(formatName(table.getName()))+"\", ");
 			bw.write("name:\""+StringUtils.uncapitalize(formatName(table.getName()))+"\", ");
 			bw.write("sqlTable:\""+table.getName()+"\", ");
 			bw.write("description:\""+(table.getDescription()==null?"":table.getDescription())+"\", ");
 
 			bw.write("\n    stereotypes:[\"entity\"],");
 
-			bw.write("\n    attributes:[");
+			bw.write("\n    attributes:{");
 			boolean isFirstColonne = true;
 			for(Colonne colonne : table.getColonneByNames().values()) {
 				if(isFirstColonne) {
@@ -72,8 +72,8 @@ public class JsonEntitiesWriter {
 				} else {
 					bw.write(",");
 				}
-				bw.write("\n      {");
-				bw.write("id:\""+StringUtils.uncapitalize(formatName(colonne.getName()))+"\", ");
+				bw.write("\n      \""+StringUtils.uncapitalize(formatId(colonne.getName()))+"\": {");
+				//bw.write("id:\""+StringUtils.uncapitalize(formatName(colonne.getName()))+"\", ");
 				bw.write("name:\""+StringUtils.uncapitalize(formatName(colonne.getName()))+"\", ");
 				bw.write("type:\""+getTypeForColonne(colonne)+"\", ");
 				bw.write("sqlName:\""+colonne.getName()+"\", ");
@@ -106,7 +106,7 @@ public class JsonEntitiesWriter {
 				}
 				bw.write("}");
 			}
-			bw.write("\n    ]");
+			bw.write("\n    }");
 
 			/*
 			bw.write("\n    links:[");
@@ -137,7 +137,7 @@ public class JsonEntitiesWriter {
 			*/
 			bw.write("\n  }");
 		}
-		bw.write("];\n\n");
+		bw.write("\n};\n\n");
 		bw.write("module.exports=entities;");
 	}
 
@@ -219,6 +219,10 @@ public class JsonEntitiesWriter {
 			return "Blob";
 		}
 		return null;
+	}
+
+	private String formatId(String name) {
+		return formatName(name).replaceAll(" ", "").replaceAll("\t", "");
 	}
 
 	private String formatName(String name) {
