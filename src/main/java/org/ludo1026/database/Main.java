@@ -2,39 +2,45 @@ package org.ludo1026.database;
 
 import org.ludo1026.database.json.writer.JsonEntitiesWriter;
 import org.ludo1026.database.json.writer.JsonEntityLinksWriter;
+import org.ludo1026.database.manager.DataSourceManager;
 import org.ludo1026.database.manager.JDBCManager;
 import org.ludo1026.database.manager.bean.Schema;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.ludo1026.util.Utils;
+
+import javax.sql.DataSource;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 public class Main {
-
-	/**
-	 * Name du fichier de configuration des scripts.
-	 */
-	public static final String SPRING_CONFIG_SCRIPT_XML = "config/database/applicationContext.xml";
 
 	public static final String CONFIG_OUT_FILENAME_ENTITIES = "generated/entities.js";
 	public static final String CONFIG_OUT_FILENAME_LINKS = "generated/links.js";
 
-	/**
-	 * Context SPRING.
-	 */
-	private static org.springframework.context.ApplicationContext context;
+	public static void main(final String[] args) throws IOException {
 
-	/**
-	 * Initialisation : charger le contexte Spring.
-	 */
-	static {
-		Main.context = new ClassPathXmlApplicationContext(new String[] { Main.SPRING_CONFIG_SCRIPT_XML, });
-	}
+        String databasePropertiesFilename;
+        if(args == null || args.length == 0 || args[0] == null || Utils.isBlank(args[0])) {
+            databasePropertiesFilename = "database.properties";
+        } else {
+            databasePropertiesFilename = args[0];
+        }
 
-	public static void main(final String[] args) {
-		final JDBCManager jdbcManager = (JDBCManager) Main.context.getBean("jdbcManager");
+        Properties properties = new Properties();
+        FileInputStream inputStream = new FileInputStream(databasePropertiesFilename);
+        properties.load(inputStream);
+
+        DataSourceManager dataSourceManager = new DataSourceManager();
+        DataSource dataSource = dataSourceManager.newDataSource(properties);
+
+        JDBCManager jdbcManager = new JDBCManager(dataSource);
 		Schema schema = jdbcManager.main();
 		
 		JsonEntitiesWriter jsonEntitiesWriter = new JsonEntitiesWriter();
 		JsonEntityLinksWriter jsonLinksWriter = new JsonEntityLinksWriter();
-		
+
+        new File("generated").mkdirs();
 		jsonEntitiesWriter.write(schema, CONFIG_OUT_FILENAME_ENTITIES);
 		jsonLinksWriter.write(schema, CONFIG_OUT_FILENAME_LINKS);
 	}

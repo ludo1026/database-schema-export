@@ -1,20 +1,14 @@
 package org.ludo1026.database.manager.bean;
 
+import org.ludo1026.util.Utils;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Colonne {
 
 	private String name, type, size, description;
 	private boolean isNullable;
-	@JsonIgnore
 	private Map<String, Object> infos = new HashMap<String, Object>();
 
 	@Override
@@ -31,7 +25,7 @@ public class Colonne {
 			return false;
 		}
 		final Colonne colonne = (Colonne) o;
-		return StringUtils.equals(this.name, colonne.getName());
+		return Utils.equals(this.name, colonne.getName());
 	}
 
 	@Override

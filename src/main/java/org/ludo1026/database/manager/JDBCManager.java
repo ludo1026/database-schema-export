@@ -1,36 +1,28 @@
 package org.ludo1026.database.manager;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import org.ludo1026.database.manager.bean.*;
+import org.ludo1026.util.AssertHelper;
+import org.ludo1026.util.Utils;
+
+import javax.sql.DataSource;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-import javax.sql.DataSource;
-
-import org.apache.commons.lang.StringUtils;
-import org.ludo1026.database.manager.bean.CleEtrangere;
-import org.ludo1026.database.manager.bean.Colonne;
-import org.ludo1026.database.manager.bean.Schema;
-import org.ludo1026.database.manager.bean.Table;
-import org.ludo1026.util.AssertHelper;
-import org.springframework.stereotype.Component;
-
-@Component("jdbcManager")
 public class JDBCManager {
 
-	@Resource(name = "dataSource")
 	private DataSource dataSource;
-	
+
+    public JDBCManager(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
 	/**
 	 * Méthode principale.
 	 */
-	public Schema main() {
+    public Schema main() {
 		try {
 			final Connection connection = this.dataSource.getConnection();
 			final DatabaseMetaData meta = connection.getMetaData();
@@ -110,7 +102,7 @@ public class JDBCManager {
 	 * 
 	 * @param connection
 	 * @param meta
-	 * @param tableDestination
+	 * @param table
 	 * @throws SQLException
 	 */
 	private Map<String,List<ForeignKey>> getForeignKeysByFkNames(final Connection connection, final DatabaseMetaData meta, final Table table, final Schema schema) throws SQLException {
@@ -241,7 +233,7 @@ public class JDBCManager {
 			colonne.setSize(resultat.getString("COLUMN_SIZE"));
 			colonne.setDescription(resultat.getString("REMARKS"));
 			String isNullableAsString = resultat.getString("IS_NULLABLE");
-			boolean isNullable = StringUtils.equalsIgnoreCase(isNullableAsString, "YES");
+			boolean isNullable = Utils.equalsIgnoreCase(isNullableAsString, "YES");
 			colonne.setIsNullable(isNullable);
 			table.addColonne(colonne);
 		}

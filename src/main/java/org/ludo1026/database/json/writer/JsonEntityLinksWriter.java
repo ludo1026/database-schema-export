@@ -1,15 +1,15 @@
 package org.ludo1026.database.json.writer;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import org.apache.commons.lang.StringUtils;
 import org.ludo1026.database.manager.bean.CleEtrangere;
 import org.ludo1026.database.manager.bean.Colonne;
 import org.ludo1026.database.manager.bean.Schema;
 import org.ludo1026.database.manager.bean.Table;
+import org.ludo1026.util.Utils;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class JsonEntityLinksWriter {
 
@@ -64,13 +64,13 @@ public class JsonEntityLinksWriter {
 	private void writeLink(BufferedWriter bw, CleEtrangere cleEtrangere)
 			throws IOException {
 		bw.write("\n    origin:{");
-		bw.write("id:\""+StringUtils.uncapitalize(formatName(cleEtrangere.getTableOrigine().getName()))+"\", ");
-		bw.write("name:\""+StringUtils.uncapitalize(formatName(cleEtrangere.getTableOrigine().getName()))+"\", ");
+		bw.write("id:\""+Utils.uncapitalize(formatName(cleEtrangere.getTableOrigine().getName()))+"\", ");
+		bw.write("name:\""+Utils.uncapitalize(formatName(cleEtrangere.getTableOrigine().getName()))+"\", ");
 		bw.write("nbMin:\"0\", ");
 		bw.write("nbMax:\"*\"},");
 		bw.write("\n    target:{");
-		bw.write("id:\""+StringUtils.uncapitalize(formatName(cleEtrangere.getTableDestination().getName()))+"\", ");
-		bw.write("name:\""+StringUtils.uncapitalize(formatName(cleEtrangere.getTableDestination().getName()))+"\", ");
+		bw.write("id:\""+Utils.uncapitalize(formatName(cleEtrangere.getTableDestination().getName()))+"\", ");
+		bw.write("name:\""+Utils.uncapitalize(formatName(cleEtrangere.getTableDestination().getName()))+"\", ");
 		bw.write("nbMin:\"0\", ");
 		bw.write("nbMax:\"1\"},");
 		bw.write("\n    attributes:[");
@@ -88,8 +88,8 @@ public class JsonEntityLinksWriter {
 				bw.write("\n      ");
 			}
 			bw.write("{");
-			bw.write("origin:\""+StringUtils.uncapitalize(formatName(origin.getName()))+"\", ");
-			bw.write("target:\""+StringUtils.uncapitalize(formatName(target.getName()))+"\"");
+			bw.write("origin:\""+Utils.uncapitalize(formatName(origin.getName()))+"\", ");
+			bw.write("target:\""+Utils.uncapitalize(formatName(target.getName()))+"\"");
 			bw.write("}");
 		}
 		if(nbColonnes > 1) {
@@ -99,10 +99,10 @@ public class JsonEntityLinksWriter {
 	}
 	
 	private String formatName(String name) {
-		if(name.equalsIgnoreCase(StringUtils.capitalize(name))) {
+		if(name.equalsIgnoreCase(Utils.capitalize(name))) {
 			name = name.toLowerCase();
 		}
-		name = StringUtils.uncapitalize(name);
+		name = Utils.uncapitalize(name);
 		if(name.contains("_")) {
 			StringBuffer b = new StringBuffer();
 			boolean detectSpecialChar = false;

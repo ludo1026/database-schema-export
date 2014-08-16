@@ -1,16 +1,16 @@
 package org.ludo1026.database.json.writer;
 
+import org.ludo1026.database.manager.bean.CleEtrangere;
+import org.ludo1026.database.manager.bean.Colonne;
+import org.ludo1026.database.manager.bean.Schema;
+import org.ludo1026.database.manager.bean.Table;
+import org.ludo1026.util.Utils;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
-
-import org.apache.commons.lang.StringUtils;
-import org.ludo1026.database.manager.bean.CleEtrangere;
-import org.ludo1026.database.manager.bean.Colonne;
-import org.ludo1026.database.manager.bean.Schema;
-import org.ludo1026.database.manager.bean.Table;
 
 public class JsonEntitiesWriter {
 
@@ -54,11 +54,11 @@ public class JsonEntitiesWriter {
 			} else {
 				bw.write(",");
 			}
-			bw.write("\n  \""+StringUtils.uncapitalize(formatId(table.getName()))+"\": {");
+			bw.write("\n  \""+Utils.uncapitalize(formatId(table.getName()))+"\": {");
 			
 			// bw.write("\n    ");
-			// bw.write("id:\""+StringUtils.uncapitalize(formatName(table.getName()))+"\", ");
-			//bw.write("name:\""+StringUtils.uncapitalize(formatName(table.getName()))+"\", ");
+			// bw.write("id:\""+Utils.uncapitalize(formatName(table.getName()))+"\", ");
+			//bw.write("name:\""+Utils.uncapitalize(formatName(table.getName()))+"\", ");
 			bw.write("sqlTable:\""+table.getName()+"\", ");
 			bw.write("description:\""+(table.getDescription()==null?"":table.getDescription())+"\", ");
 
@@ -72,9 +72,9 @@ public class JsonEntitiesWriter {
 				} else {
 					bw.write(",");
 				}
-				bw.write("\n    \""+StringUtils.uncapitalize(formatId(colonne.getName()))+"\": {");
-				//bw.write("id:\""+StringUtils.uncapitalize(formatName(colonne.getName()))+"\", ");
-				//bw.write("name:\""+StringUtils.uncapitalize(formatName(colonne.getName()))+"\", ");
+				bw.write("\n    \""+Utils.uncapitalize(formatId(colonne.getName()))+"\": {");
+				//bw.write("id:\""+Utils.uncapitalize(formatName(colonne.getName()))+"\", ");
+				//bw.write("name:\""+Utils.uncapitalize(formatName(colonne.getName()))+"\", ");
 				bw.write("type:\""+getTypeForColonne(colonne)+"\", ");
 				bw.write("sqlName:\""+colonne.getName()+"\", ");
 				bw.write("sqlType:\""+colonne.getType()+"\", ");
@@ -147,7 +147,7 @@ public class JsonEntitiesWriter {
 	private void writeLink(BufferedWriter bw, 
 			Map<String, Integer> nbByTableDestination, CleEtrangere cleEtrangere, String nbMin, String nbMax)
 			throws IOException {
-		String name = StringUtils.uncapitalize(formatName(cleEtrangere.getTableDestination().getName()));
+		String name = Utils.uncapitalize(formatName(cleEtrangere.getTableDestination().getName()));
 		if(!"1".equals(nbMax)) {
 			name = name + "s";
 		}
@@ -162,7 +162,7 @@ public class JsonEntitiesWriter {
 		bw.write("\n      {");
 		bw.write("id:\""+id+"\", ");
 		bw.write("name:\""+id+"\", ");
-		bw.write("target:\""+StringUtils.uncapitalize(formatName(cleEtrangere.getTableDestination().getName()))+"\", ");
+		bw.write("target:\""+Utils.uncapitalize(formatName(cleEtrangere.getTableDestination().getName()))+"\", ");
 		bw.write("nbMin:\""+nbMin+"\", ");
 		bw.write("nbMax:\""+nbMax+"\", ");
 		bw.write("\n        attributes:[");
@@ -180,8 +180,8 @@ public class JsonEntitiesWriter {
 				bw.write("\n          ");
 			}
 			bw.write("{");
-			bw.write("origin:\""+StringUtils.uncapitalize(formatName(origin.getName()))+"\", ");
-			bw.write("target:\""+StringUtils.uncapitalize(formatName(target.getName()))+"\"");
+			bw.write("origin:\""+Utils.uncapitalize(formatName(origin.getName()))+"\", ");
+			bw.write("target:\""+Utils.uncapitalize(formatName(target.getName()))+"\"");
 			bw.write("}");
 		}
 		if(nbColonnes > 1) {
@@ -196,10 +196,10 @@ public class JsonEntitiesWriter {
 	}
 
 	private String getTypeJavaForTypeSQL(String typeSQL) {
-		if (StringUtils.isBlank(typeSQL)) {
+		if (Utils.isBlank(typeSQL)) {
 			return null;
 		}
-		typeSQL = StringUtils.lowerCase(typeSQL);
+		typeSQL = Utils.lowerCase(typeSQL);
 		if (typeSQL.equalsIgnoreCase("long varchar") || typeSQL.startsWith("varchar") || typeSQL.startsWith("nchar")) {
 			return "String";
 		}
@@ -229,10 +229,10 @@ public class JsonEntitiesWriter {
 	}
 
 	private String formatName(String name) {
-		if(name.equalsIgnoreCase(StringUtils.capitalize(name))) {
+		if(name.equalsIgnoreCase(Utils.capitalize(name))) {
 			name = name.toLowerCase();
 		}
-		name = StringUtils.uncapitalize(name);
+		name = Utils.uncapitalize(name);
 		if(name.contains("_")) {
 			StringBuffer b = new StringBuffer();
 			boolean detectSpecialChar = false;
