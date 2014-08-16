@@ -31,6 +31,36 @@ public class Main {
         FileInputStream inputStream = new FileInputStream(databasePropertiesFilename);
         properties.load(inputStream);
 
+        boolean hasError = false;
+        if(Utils.isBlank(properties.getProperty("database.driverClassName"))) {
+            hasError = true;
+            System.err.println("Error : Please define the JDBC driver class name in the property 'database.driverClassName' in the file : '"+databasePropertiesFilename+"'.");
+        }
+        if(Utils.isBlank(properties.getProperty("database.url"))) {
+            hasError = true;
+            System.err.println("Error : Please define the JDBC URL to the database in the property 'database.url' in the file : '"+databasePropertiesFilename+"'.");
+        }
+        if(Utils.isBlank(properties.getProperty("database.username"))) {
+            hasError = true;
+            System.err.println("Error : Please define the username of the database in the property 'database.username' in the file : '"+databasePropertiesFilename+"'.");
+        }
+        if(Utils.isBlank(properties.getProperty("database.password"))) {
+            hasError = true;
+            System.err.println("Error : Please define the password of the database in the property 'database.password' in the file : '"+databasePropertiesFilename+"'.");
+        }
+        if(!Utils.isBlank(properties.getProperty("database.driverClassName"))) {
+            try {
+                Class.forName(properties.getProperty("database.driverClassName"));
+            } catch(ClassNotFoundException e) {
+                hasError = true;
+                System.err.println("Error : the JDBC class '"+properties.getProperty("database.driverClassName")+"' can not be loaded.");
+                System.err.println("=> Please add the JAR of the JDBC Driver in the 'lib' directory.");
+            }
+        }
+        if(hasError) {
+            System.exit(1);
+        }
+
         DataSourceManager dataSourceManager = new DataSourceManager();
         DataSource dataSource = dataSourceManager.newDataSource(properties);
 
