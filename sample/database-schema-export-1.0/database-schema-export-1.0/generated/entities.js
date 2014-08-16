@@ -99,9 +99,9 @@ var entities = {
   }},
   "review": {sqlTable:"REVIEW", description:"", attributes: {
     "reviewText": {type:"String", sqlName:"REVIEW_TEXT", sqlType:"LONG VARCHAR", size:"32700", isPK:"false", isNotNull:"false", description:""},
-    "lastUpdate": {type:"Date", sqlName:"LAST_UPDATE", sqlType:"TIMESTAMP", size:"26", isPK:"false", isNotNull:"false", description:""},
+    "lastUpdate": {type:"Date", sqlName:"LAST_UPDATE", sqlType:"TIMESTAMP", size:"29", isPK:"false", isNotNull:"false", description:""},
     "bookId": {type:"Integer", sqlName:"BOOK_ID", sqlType:"INTEGER", size:"10", isPK:"true", isNotNull:"true", description:""},
-    "creation": {type:"Date", sqlName:"CREATION", sqlType:"TIMESTAMP", size:"26", isPK:"false", isNotNull:"false", description:""},
+    "creation": {type:"Date", sqlName:"CREATION", sqlType:"TIMESTAMP", size:"29", isPK:"false", isNotNull:"false", description:""},
     "customerCode": {type:"String", sqlName:"CUSTOMER_CODE", sqlType:"VARCHAR", size:"5", isPK:"true", isNotNull:"true", description:""},
     "reviewNote": {type:"Integer", sqlName:"REVIEW_NOTE", sqlType:"INTEGER", size:"10", isPK:"false", isNotNull:"false", description:""}
   }}

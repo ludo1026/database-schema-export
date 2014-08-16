@@ -15,8 +15,8 @@ import java.util.Properties;
 
 public class Main {
 
-	public static final String CONFIG_OUT_FILENAME_ENTITIES = "generated/entities.js";
-	public static final String CONFIG_OUT_FILENAME_LINKS = "generated/links.js";
+	public static final String CONFIG_OUT_FILENAME_ENTITIES = "model/entities.js";
+	public static final String CONFIG_OUT_FILENAME_LINKS = "model/links.js";
 
 	public static void main(final String[] args) throws IOException {
 
@@ -70,7 +70,7 @@ public class Main {
 		JsonEntitiesWriter jsonEntitiesWriter = new JsonEntitiesWriter();
 		JsonEntityLinksWriter jsonLinksWriter = new JsonEntityLinksWriter();
 
-        new File("generated").mkdirs();
+        new File("model").mkdirs();
 		jsonEntitiesWriter.write(schema, CONFIG_OUT_FILENAME_ENTITIES);
 		jsonLinksWriter.write(schema, CONFIG_OUT_FILENAME_LINKS);
 	}
